@@ -1,0 +1,1 @@
+CREATE POLICY "Anyone can delete scan history" ON public.scan_history FOR DELETE USING (true);

@@ -32,7 +32,7 @@ const UrlDetector = () => {
       <Button onClick={handleAnalyze} disabled={loading} className="gap-2">
         {loading ? "Scanning..." : <><Send className="h-4 w-4" /> Scan URL</>}
       </Button>
-      {result && <ResultDisplay result={result} />}
+      {result && <ResultDisplay result={result} scanType="URL Scanner" inputPreview={url} />}
     </div>
   );
 };

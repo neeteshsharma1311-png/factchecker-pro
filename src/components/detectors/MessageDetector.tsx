@@ -32,7 +32,7 @@ const MessageDetector = () => {
       <Button onClick={handleAnalyze} disabled={loading} className="gap-2">
         {loading ? "Analyzing..." : <><Send className="h-4 w-4" /> Detect Scam</>}
       </Button>
-      {result && <ResultDisplay result={result} />}
+      {result && <ResultDisplay result={result} scanType="Scam Message" inputPreview={msg.slice(0, 100)} />}
     </div>
   );
 };

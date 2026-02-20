@@ -16,5 +16,35 @@ export async function analyzeContent(payload: AnalyzePayload): Promise<AnalysisR
   });
 
   if (error) throw new Error(error.message || "Analysis failed");
-  return data as AnalysisResult;
+  const result = data as AnalysisResult;
+
+  // Save to history
+  const inputPreview = payload.headline
+    ? `${payload.headline} — ${(payload.content || "").slice(0, 100)}`
+    : payload.type === "image"
+    ? "[Image uploaded]"
+    : (payload.content || "").slice(0, 150);
+
+  await supabase.from("scan_history").insert({
+    scan_type: payload.type,
+    input_preview: inputPreview,
+    classification: result.classification,
+    confidence: result.confidence,
+    risk_level: result.riskLevel,
+    explanation: result.explanation,
+    details: result.details || {},
+  });
+
+  return result;
+}
+
+export async function fetchScanHistory(limit = 50) {
+  const { data, error } = await supabase
+    .from("scan_history")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data;
 }

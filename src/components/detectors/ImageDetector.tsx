@@ -67,7 +67,7 @@ const ImageDetector = () => {
       <Button onClick={handleAnalyze} disabled={loading || !base64} className="gap-2">
         {loading ? "Analyzing..." : <><Send className="h-4 w-4" /> Analyze Image</>}
       </Button>
-      {result && <ResultDisplay result={result} />}
+      {result && <ResultDisplay result={result} scanType="Image Analysis" inputPreview="[Uploaded Image]" />}
     </div>
   );
 };
