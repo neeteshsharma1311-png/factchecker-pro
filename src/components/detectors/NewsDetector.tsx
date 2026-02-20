@@ -53,7 +53,7 @@ const NewsDetector = () => {
       <Button onClick={handleAnalyze} disabled={loading} className="gap-2">
         {loading ? "Analyzing..." : <><Send className="h-4 w-4" /> Analyze Article</>}
       </Button>
-      {result && <ResultDisplay result={result} />}
+      {result && <ResultDisplay result={result} scanType="Fake News" inputPreview={headline || article.slice(0, 100)} />}
     </div>
   );
 };
